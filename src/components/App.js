@@ -1,29 +1,25 @@
 import React, { Component } from 'react'
 import UserCreate from './UserCreate'
-import LanguageContext from '../contexts/LanguageContext'
+import {LanguageStore} from '../contexts/LanguageContext'
+import ColorContext from '../contexts/ColorContect'
+import LanguageSelector from '../components/LanguageSelector'
 
 class App extends Component {
 
-    state = { language: 'english'}
+    // state = { language: 'english'}
 
-    onLanguageChange = language => {
-        this.setState({ language })
-    }
+    // onLanguageChange = language => {
+    //     this.setState({ language })
+    // }
   render() {
     return (
       <div className="ui container">
-        <div>
-            Select a language: <span>
-            <i className="flag us" onClick={()=> this.onLanguageChange('english')} />
-            <i className="flag nl" onClick={()=> this.onLanguageChange('dutch')} />
-            </span> 
-
-           
-        </div>
-        <LanguageContext.Provider value={this.state.language}>
-        <UserCreate />
-        </LanguageContext.Provider>
-        
+        <LanguageStore>
+        <LanguageSelector />
+        <ColorContext.Provider value="red">
+            <UserCreate />
+        </ColorContext.Provider>
+        </LanguageStore>
       </div>
     )
   }
